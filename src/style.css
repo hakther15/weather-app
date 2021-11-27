@@ -111,3 +111,6 @@ button.locationButton {
   color: white;
   transition: 100ms ease-in-out;
 }
+div.github {
+  text-align: center;
+}
