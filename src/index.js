@@ -12,6 +12,7 @@ let cityInput = document.querySelector("#city-input");
 let tempHi = document.querySelector("#temp-hi");
 let tempLo = document.querySelector("#temp-lo");
 let weatherType = document.querySelector("#weather-type");
+let iconElement = document.querySelector("#icon");
 
 function formatDate(date) {
   let hours = now.getHours();
@@ -49,6 +50,7 @@ function showTemperature(response) {
   let hiTemp = Math.round(response.data.main.temp_max);
   let cityName = response.data.name;
   let countryName = response.data.sys.country;
+  let iconType = response.data.weather[0].icon;
   searchedCity.innerHTML = `${cityName}, ${countryName}`;
   temperatureElement.innerHTML = `${temperature}° `;
   humidity.innerHTML = `${response.data.main.humidity}%`;
@@ -57,6 +59,11 @@ function showTemperature(response) {
   tempLo.innerHTML = `${loTemp} °F`;
   tempHi.innerHTML = `${hiTemp} °F`;
   weatherType.innerHTML = `${response.data.weather[0].description}`;
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${iconType}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].icon);
 }
 
 function getCurrentTemperatureOnCity(event) {
