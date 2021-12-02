@@ -116,3 +116,7 @@ button.locationButton {
 div.github {
   text-align: center;
 }
+
+.mph {
+  text-transform: lowercase;
+}
