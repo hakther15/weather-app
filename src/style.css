@@ -64,6 +64,7 @@ p.card-text1,
 p.card-text2 {
   text-align: center;
   font-family: "Arima Madurai", cursive;
+  text-transform: capitalize;
 }
 h1.card-title {
   font-size: 35px;
