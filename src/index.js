@@ -64,6 +64,8 @@ function showTemperature(response) {
     `http://openweathermap.org/img/wn/${iconType}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].icon);
+
+  fahrenheitTemperature = response.data.main.temp;
 }
 
 function getCurrentTemperatureOnCity(event) {
@@ -95,6 +97,18 @@ function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(retrievePosition);
 }
+
+let fahrenheitTemperature = null;
+
+function convertToCelsius(event) {
+  event.preventDefault();
+  let celsiusTemperature = ((fahrenheitTemperature - 32) * 5) / 9;
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}° `;
+}
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", convertToCelsius);
 
 button.addEventListener("click", currentLocationSearch);
 getCurrentTemperatureOnCity("Cleveland");

@@ -45,6 +45,10 @@ div.card-group {
   border: rgb(161, 54, 255) 5px solid;
 }
 
+div.card {
+  background: rgba(201, 229, 255, 0.5);
+}
+
 div.card-body1 {
   background: rgb(166, 193, 238);
   color: white;
