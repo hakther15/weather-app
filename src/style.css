@@ -70,6 +70,12 @@ p.card-text2 {
   font-family: "Arima Madurai", cursive;
   text-transform: capitalize;
 }
+
+a.f,
+a.c {
+  text-decoration: none;
+  cursor: default;
+}
 h1.card-title {
   font-size: 35px;
   font-family: "Arima Madurai", cursive;
