@@ -130,3 +130,7 @@ div.github {
 .mph {
   text-transform: lowercase;
 }
+
+.temperature-min {
+  opacity: 0.6;
+}
