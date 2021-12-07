@@ -93,11 +93,20 @@ p.card-text2 {
 h1.week {
   display: inline;
   position: relative;
-  top: -1px;
+  top: -20px;
   right: 5px;
   padding: 0px 20px 0px 10px;
   font-size: 40px;
   font-family: "Playball", cursive;
+}
+
+div.weather-forecast {
+  position: relative;
+  top: -20px;
+  right: -200px;
+  text-align: center;
+  font-family: "Arima Madurai", cursive;
+  text-transform: capitalize;
 }
 div.card {
   display: inline-block;

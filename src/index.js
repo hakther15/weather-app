@@ -1,7 +1,7 @@
 let now = new Date();
+let currentLocationButton = document.querySelector(".locationButton");
 let searchEngine = document.querySelector("#search-form");
 let apiKey = "b4d94ed61b2db6baa9789149670b85e3";
-let currentLocationButton = document.querySelector("#button");
 let units = "imperial";
 let temperatureElement = document.querySelector("#temperature");
 let searchedCity = document.querySelector("#location-name");
@@ -98,10 +98,13 @@ function showTemperature(response) {
   fahrenheitTemperature = response.data.main.temp;
 }
 
-function getCurrentTemperatureOnCity(event) {
+function handleSubmit(event) {
   event.preventDefault();
+  getCurrentTemperatureOnCity(cityInput.value);
+}
 
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${apiKey}&units=${units}`;
+function getCurrentTemperatureOnCity(city) {
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
   axios
     .get(`${apiUrl}`)
     .then(showTemperature)
@@ -153,6 +156,6 @@ celsiusLink.addEventListener("click", convertToCelsius);
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", convertToFahrenheit);
 
-button.addEventListener("click", currentLocationSearch);
+currentLocationButton.addEventListener("click", currentLocationSearch);
 getCurrentTemperatureOnCity("Cleveland");
 displayForecast();
