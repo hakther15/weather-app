@@ -93,8 +93,8 @@ p.card-text2 {
 h1.week {
   display: inline;
   position: relative;
-  top: -65px;
-  right: 15px;
+  top: -1px;
+  right: 5px;
   padding: 0px 20px 0px 10px;
   font-size: 40px;
   font-family: "Playball", cursive;
@@ -133,4 +133,15 @@ div.github {
 
 .temperature-min {
   opacity: 0.6;
+}
+
+.weather-forecast {
+  margin-top: 20px;
+  text-align: center;
+  color: #000;
+}
+
+.weather-forecast-date {
+  font-size: 16px;
+  opacity: 0.5;
 }
