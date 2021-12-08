@@ -72,6 +72,12 @@ function formatDate(date) {
 }
 formatDate();
 
+function getForecast(coordinates) {
+  let apiKey = "b4d94ed61b2db6baa9789149670b85e3";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function showTemperature(response) {
   let temperature = Math.round(response.data.main.temp);
   let windSpeed = Math.round(response.data.wind.speed);
@@ -96,6 +102,8 @@ function showTemperature(response) {
   iconElement.setAttribute("alt", response.data.weather[0].icon);
 
   fahrenheitTemperature = response.data.main.temp;
+
+  getforecast(response.data.coord);
 }
 
 function handleSubmit(event) {
