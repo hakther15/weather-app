@@ -14,37 +14,7 @@ let tempLo = document.querySelector("#temp-lo");
 let weatherType = document.querySelector("#weather-type");
 let iconElement = document.querySelector("#icon");
 
-function displayForecast() {
-  let forecastElement = document.querySelector("#forecast");
-
-  let days = ["Thu", "Fri", "Sat", "Sun"];
-
-  let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
-      <div class="col-2">
-        <div class="weather-forecast-date">${day}</div>
-        <img
-          src="http://openweathermap.org/img/wn/50d@2x.png"
-          alt=""
-          width="42"
-        />
-        <div class="weather-forecast-temperatures">
-          <span class="temperature-max"> 18° </span>
-          <span class="temperature-min"> 12° </span>
-        </div>
-      </div>
-  `;
-  });
-
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
-  console.log(forecastHTML);
-}
-
-function formatDate(date) {
+function formatDate() {
   let hours = now.getHours();
 
   if (hours < 10) {
@@ -71,6 +41,43 @@ function formatDate(date) {
   h1.innerHTML = `${day} ${hours}:${minutes}`;
 }
 formatDate();
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
+      <div class="col-2">
+        <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
+        <img
+          src="http://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png"
+          alt=""
+          width="42"
+        />
+        <div class="weather-forecast-temperatures">
+          <span class="temperature-max"> ${Math.round(
+            forecastDay.temp.max
+          )}° </span>
+          <span class="temperature-min"> ${Math.round(
+            forecastDay.temp.min
+          )}° </span>
+        </div>
+      </div>
+  `;
+    }
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
 
 function getForecast(coordinates) {
   let apiKey = "b4d94ed61b2db6baa9789149670b85e3";
