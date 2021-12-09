@@ -117,7 +117,7 @@ function getCurrentTemperatureOnCity(city) {
     .get(`${apiUrl}`)
     .then(showTemperature)
     .catch(function (err) {
-      searchedCity.innerHTML = null;
+      searchedCity.innerHTML = `${cityName}, ${countryName}`;
     });
 }
 
@@ -132,7 +132,7 @@ function currentLocationSearch(event) {
 }
 navigator.geolocation.getCurrentPosition(retrievePosition);
 
-searchEngine.addEventListener("submit", getCurrentTemperatureOnCity);
+searchEngine.addEventListener("submit", handleSubmit);
 
 function getCurrentLocation(event) {
   event.preventDefault();
