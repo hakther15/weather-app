@@ -45,8 +45,9 @@ let h1 = document.querySelector("h1");
 h1.innerHTML = formatDate(now);
 
 function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-  forecast.forEach(function (forecastDay, index) {
+  response.data.daily.forEach(function (forecastDay, index) {
     if (index < 6) {
       forecastHTML =
         forecastHTML +
