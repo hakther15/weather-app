@@ -14,18 +14,19 @@ let tempLo = document.querySelector("#temp-lo");
 let weatherType = document.querySelector("#weather-type");
 let iconElement = document.querySelector("#icon");
 
-function formatDate() {
-  let hours = now.getHours();
+function formatDate(date) {
+  console.log(date);
+  let hours = date.getHours();
 
   if (hours < 10) {
     hours = `0${hours}`;
   }
 
-  let minutes = now.getMinutes();
+  let minutes = date.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-  let dayIndex = now.getDay();
+  let dayIndex = date.getDay();
   let days = [
     "Sunday",
     "Monday",
@@ -37,16 +38,13 @@ function formatDate() {
   ];
   let day = days[dayIndex];
 
-  let h1 = document.querySelector("h1");
-  h1.innerHTML = `${day} ${hours}:${minutes}`;
+  return `${day} ${hours}:${minutes}`;
 }
-formatDate();
+
+let h1 = document.querySelector("h1");
+h1.innerHTML = formatDate(now);
 
 function displayForecast(response) {
-  let forecast = response.data.daily;
-
-  let forecastElement = document.querySelector("#forecast");
-
   let forecastHTML = `<div class="row">`;
   forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
@@ -54,7 +52,9 @@ function displayForecast(response) {
         forecastHTML +
         `
       <div class="col-2">
-        <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
+        <div class="weather-forecast-date">${formatDate(
+          new Date(forecastDay.dt * 1000)
+        )}</div>
         <img
           src="http://openweathermap.org/img/wn/${
             forecastDay.weather[0].icon
@@ -109,8 +109,7 @@ function showTemperature(response) {
   iconElement.setAttribute("alt", response.data.weather[0].icon);
 
   fahrenheitTemperature = response.data.main.temp;
-
-  getforecast(response.data.coord);
+  getForecast(response.data.coord);
 }
 
 function handleSubmit(event) {
@@ -124,7 +123,7 @@ function getCurrentTemperatureOnCity(city) {
     .get(`${apiUrl}`)
     .then(showTemperature)
     .catch(function (err) {
-      searchedCity.innerHTML = `${cityName}, ${countryName}`;
+      `Unable to fetch weather information for ${city}`;
     });
 }
 
@@ -173,4 +172,3 @@ fahrenheitLink.addEventListener("click", convertToFahrenheit);
 
 currentLocationButton.addEventListener("click", currentLocationSearch);
 getCurrentTemperatureOnCity("Cleveland");
-displayForecast();
